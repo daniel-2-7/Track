@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h1 class="my-4">Modification Savings Goal</h1>
+            <form method="POST" onsubmit="validateSavingsGoal()">
+                <div class="form-group">
+                    <label for="savings_amount">Savings Goal Amount:</label>
+                    <input type="number" name="savings_amount" id="savings_amount" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Set Savings Goal</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+function validateSavingsGoal() {
+    var savingsAmount = parseFloat(document.getElementById("savings_amount").value);
+    if (savingsAmount <= 0) {
+        alert("Savings Goal cannot be zero or less than zero. Please enter a valid number.");
+        return false; // Prevent form submission
+    }
+    return true; // Allow form submission
+}
+</script>
+
+{% endblock %}

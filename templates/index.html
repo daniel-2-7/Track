@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<style>
+    body{
+        background-image: url("https://picsum.photos/id/397/1900/1100");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+</style>
+    <br>
+    <br>
+
+<div style="background-color: transparent;border-radius: 12px" class="container text-center">
+  <div class="row">
+    <div class="col-md-4">
+      <div style="background-color: white;border-radius: 12px" class="jumbotron mt-3">
+        <h1 class="display-4"><strong>Income</strong></h1>
+        <hr class="my-4">
+        <p>Sum of Income: £{{income_total}}</p>
+        <br>
+        <a style="background-color: cadetblue;border-color: cadetblue" class="btn btn-primary btn-lg" href="/income" role="button">View</a>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div style="background-color: white;border-radius: 12px" class="jumbotron mt-3">
+        <h1 class="display-4"><strong>Expenditure</strong></h1>
+        <hr class="my-4">
+        <p>Sum of Expenditure: £{{expenditure_total}}</p>
+        <br>
+        <a style="background-color: cadetblue;border-color: cadetblue" class="btn btn-primary btn-lg" href="/expenditure" role="button">View</a>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div style="background-color: white;border-radius: 12px" class="jumbotron mt-3">
+        <h1 class="display-4"><strong>Savings</strong></h1>
+        <hr class="my-4">
+        <p>Displays Savings Goal</p>
+        <br>
+        <a style="background-color: cadetblue;border-color: cadetblue" class="btn btn-primary btn-lg" href="/savings" role="button">View</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+<br>
+<h1 style="color: white"> Income - Expenditure: £{{difference}}</h1>
+<h1 style="color: white"> Current Progress Towards Savings Goal: {{home_progress}}%</h1>
+<br>
+<div class = "progress">
+  <div class = "progress-bar bg-info" role="progressbar" aria-valuenow="{{home_progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{home_progress}}%;"></div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,23 @@
+/* Custom styles for the body */
+body {
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+
+/* Custom styles for the navbar */
+.navbar {
+    background-color: cadetblue;
+}
+
+/* Custom styles for navigation links */
+.nav-link {
+    color: aliceblue;
+}
+
+/* Custom styles for headings */
+h1 {
+    color: #333;
+    font-size: 40px;
+}
+
+/* Add more custom styles as needed */

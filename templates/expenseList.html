@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <br>
+    <br>
+    <br>
+
+<style>
+    body{
+        background-image: url("https://picsum.photos/id/481/1900/1100");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+</style>
+
+    <div class = "container">
+        <div class = "row">
+            <div class = "col md-12">
+
+                <div class = "jumbotron p-3">
+
+                    <h2>View <b>List of Expenditure</b> <button type="button" style="color: black;background-color: white;border-color: white" class = "btn btn-info float-right"class = "btn btn-success float-right" data-toggle = "modal" data-target = "#mymodal"> + Expenditure</button></h2>
+
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                    {% for message in messages %}
+
+                    <div class = "alert alert-success alert dismissable" role="alert">
+
+                        <button type="button" class="close" data-dismiss="alert" aria-label="close">
+
+                            <span aria-hidden="true">x</span>
+
+                        </button>
+
+                        {{message}}
+
+                    </div>
+
+
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                    <table class = "table table-hover table-info">
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Amount</th>
+                            <th>Action</th>
+                        </tr>
+
+
+                        {% for row in expenditures %}
+                        <tr>
+                            <td>{{row.exp_id}}</td>
+                            <td>{{row.exp_name}}</td>
+                            <td>{{row.exp_type}}</td>
+                            <td>£{{row.exp_amount}}</td>
+
+                            <td>
+                                <a href = "/exp_update/{{row.exp_id}}" style="border-radius: 5px;background-color: lightgoldenrodyellow;border-color: lightgoldenrodyellow;color: black" class = "btn btn-primary btn-xs" data-toggle = "modal" data-target="#modaledit{{row.exp_id}}">Edit</a>
+                                <a href = "/exp_delete/{{row.exp_id}}" style="border-radius: 5px;background-color: lightcoral;border-color: lightcoral;color: black" class = "btn btn-danger btn-xs" onclick = "return confirm('Are You Sure You Want To Delete?')">Delete</a>
+                            </td>
+
+                        </tr>
+
+            <div id = "modaledit{{row.exp_id}}" class = "modal fade" role = "dialog">
+                <div class = "modal-dialog">
+                    <div class = "modal-content">
+                        <div class = "modal-header">
+
+                            <h4 class = "modal-title">Update Information</h4>
+                        </div>
+                        <div class = "modal-body">
+
+                            <form action = "{{url_for('exp_update')}}" method = "POST">
+
+                                <div class = "form-group">
+
+                                    <label>Name:</label>
+                                    <input type = "hidden" name = "exp_id" value = "{{row.exp_id}}">
+                                    <input type = "text" class = "form-control" name = "exp_name" value = "{{row.exp_name}}">
+
+                                </div>
+
+                                <div class = "form-group">
+
+                                    <label>Type:</label>
+                                    <input type = "text" class = "form-control" name = "exp_type" value = "{{row.exp_type}}">
+
+                                </div>
+
+                                <div class = "form-group">
+
+                                    <label>Amount:</label>
+                                    <input type = "number" class = "form-control" name = "exp_amount" required = "{{row.exp_amount}}" min="0.01" step="0.01">
+
+                                </div>
+
+                                <div class = "form-group">
+                                    <button class = "btn btn-primary" type = "submit">Update</button>
+                                </div>
+
+                            </form>
+                        </div>
+
+                        <div class = "modal-footer">
+
+                            <button type = "button" class = "btn btn-warning" data-dismiss = "modal">Close</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                        {% endfor %}
+
+                        <tr>
+                            <td colspan="3"></td>
+                            <td style="text-align:-moz-left"><strong>Sum of Expenditure:</strong></td>
+                            <td>£{{exp_total}}</td>
+                        </tr>
+                    </table>
+
+                </div>
+<div id = "mymodal" class = "modal fade" role = "dialog">
+    <div class = "modal-dialog">
+        <div class = "modal-content">
+            <div class = "modal-header">
+
+                <h4 class = "modal-title">Add New Expenditure</h4>
+            </div>
+            <div class = "modal-body">
+
+                <form action = "{{url_for('exp_insert')}}" method = "POST">
+
+                    <div class = "form-group">
+
+                        <label>Name:</label>
+                        <input type = "text" class = "form-control" name = "exp_name" required = "1">
+
+                    </div>
+
+                    <div class = "form-group">
+
+                        <label>Type:</label>
+                        <input type = "text" class = "form-control" name = "exp_type" required = "1">
+
+                    </div>
+
+                    <div class = "form-group">
+
+                        <label>Amount:</label>
+                        <input type = "number" class = "form-control" name = "exp_amount" required = "1" min="0.01" step="0.01">
+
+                    </div>
+
+                    <div class = "form-group">
+                        <button class = "btn btn-primary" type = "submit">Add New Expenditure</button>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class = "modal-footer">
+
+                <button type = "button" class = "btn btn-warning" data-dismiss = "modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
